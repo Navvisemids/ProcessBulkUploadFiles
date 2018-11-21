@@ -1,0 +1,14 @@
+D:\Navvis\GitHub\CoreoHome.ProcessBulkUploadFiles\CoreoHome.ProcessBulkUploadFiles\obj\Debug\CoreoHome.ProcessBulkUploadFiles.csprojAssemblyReference.cache
+D:\Navvis\GitHub\CoreoHome.ProcessBulkUploadFiles\CoreoHome.ProcessBulkUploadFiles\obj\Debug\CoreoHome.ProcessBulkUploadFiles.csproj.CoreCompileInputs.cache
+D:\Navvis\GitHub\CoreoHome.ProcessBulkUploadFiles\CoreoHome.ProcessBulkUploadFiles\bin\Debug\CoreoHome.ProcessBulkUploadFiles.exe.config
+D:\Navvis\GitHub\CoreoHome.ProcessBulkUploadFiles\CoreoHome.ProcessBulkUploadFiles\bin\Debug\CoreoHome.ProcessBulkUploadFiles.exe
+D:\Navvis\GitHub\CoreoHome.ProcessBulkUploadFiles\CoreoHome.ProcessBulkUploadFiles\bin\Debug\CoreoHome.ProcessBulkUploadFiles.pdb
+D:\Navvis\GitHub\CoreoHome.ProcessBulkUploadFiles\CoreoHome.ProcessBulkUploadFiles\obj\Debug\CoreoHome.ProcessBulkUploadFiles.exe
+D:\Navvis\GitHub\CoreoHome.ProcessBulkUploadFiles\CoreoHome.ProcessBulkUploadFiles\obj\Debug\CoreoHome.ProcessBulkUploadFiles.pdb
+D:\Navvis\GitHub\ProcessBulkUploadFiles\CoreoHome.ProcessBulkUploadFiles\bin\Debug\CoreoHome.ProcessBulkUploadFiles.exe.config
+D:\Navvis\GitHub\ProcessBulkUploadFiles\CoreoHome.ProcessBulkUploadFiles\bin\Debug\CoreoHome.ProcessBulkUploadFiles.exe
+D:\Navvis\GitHub\ProcessBulkUploadFiles\CoreoHome.ProcessBulkUploadFiles\bin\Debug\CoreoHome.ProcessBulkUploadFiles.pdb
+D:\Navvis\GitHub\ProcessBulkUploadFiles\CoreoHome.ProcessBulkUploadFiles\obj\Debug\CoreoHome.ProcessBulkUploadFiles.csprojAssemblyReference.cache
+D:\Navvis\GitHub\ProcessBulkUploadFiles\CoreoHome.ProcessBulkUploadFiles\obj\Debug\CoreoHome.ProcessBulkUploadFiles.csproj.CoreCompileInputs.cache
+D:\Navvis\GitHub\ProcessBulkUploadFiles\CoreoHome.ProcessBulkUploadFiles\obj\Debug\CoreoHome.ProcessBulkUploadFiles.exe
+D:\Navvis\GitHub\ProcessBulkUploadFiles\CoreoHome.ProcessBulkUploadFiles\obj\Debug\CoreoHome.ProcessBulkUploadFiles.pdb
