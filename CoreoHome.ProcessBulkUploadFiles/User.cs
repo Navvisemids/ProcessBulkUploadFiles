@@ -1,6 +1,10 @@
-﻿namespace CoreoHome.ProcessBulkUploadFiles
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace CoreoHome.ProcessBulkUploadFiles
 {
-    public class User
+    class User
     {
         public string access_token { get; set; }
     }

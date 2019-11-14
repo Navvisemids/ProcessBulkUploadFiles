@@ -28,14 +28,14 @@ namespace CoreoHome.ProcessBulkUploadFiles
             {
                 var token = Token();
                 if (!string.IsNullOrEmpty(token.Result))
-                {
-                    CallApiGet(ConfigurationManager.AppSettings["PatientUrl"], UploadFileType.Patient, token.Result);
-                    CallApiGet(ConfigurationManager.AppSettings["CareTeamUrl"], UploadFileType.CareTeam, token.Result);
-                    CallApiGet(ConfigurationManager.AppSettings["ServiceProviderUrl"], UploadFileType.ServiceProvider, token.Result);
-                    CallApiGet(ConfigurationManager.AppSettings["EntityUrl"], UploadFileType.Entity, token.Result);
-                    CallApiGet(ConfigurationManager.AppSettings["EntityServiceProviderUrl"], UploadFileType.EntityServiceProvider, token.Result);
-                    CallApiGet(ConfigurationManager.AppSettings["EntityUserUrl"], UploadFileType.EntityUser, token.Result);
-                    CallApiGet(ConfigurationManager.AppSettings["PatientTagsUrl"], UploadFileType.PatientTags, token.Result);
+                {                   
+                    CallApiGet(Setting.PatientUrl, UploadFileType.Patient, token.Result);
+                    CallApiGet(Setting.CareTeamUrl, UploadFileType.CareTeam, token.Result);
+                    CallApiGet(Setting.ServiceProviderUrl, UploadFileType.ServiceProvider, token.Result);
+                    CallApiGet(Setting.EntityUrl, UploadFileType.Entity, token.Result);
+                    CallApiGet(Setting.EntityServiceProviderUrl, UploadFileType.EntityServiceProvider, token.Result);
+                    CallApiGet(Setting.EntityUserUrl, UploadFileType.EntityUser, token.Result);
+                    CallApiGet(Setting.PatientTagsUrl, UploadFileType.PatientTags, token.Result);
                 }
                 Console.Read();
             }
@@ -51,8 +51,11 @@ namespace CoreoHome.ProcessBulkUploadFiles
             var clientid = "roclientsp";
             var clientsecret = "coreohomesecret";
             var granttype = "password";
-            var username = "peter.allen@mailinator.com";
-            var password = "Emids@111";
+            //var username = "peter.allen@mailinator.com";
+            //var password = "Emids@111";
+
+            var username = "tyler.ford@mailinator.com";
+            var password = "Emids@000";
 
             var formContent = new FormUrlEncodedContent(new[]
                         {
@@ -67,7 +70,7 @@ namespace CoreoHome.ProcessBulkUploadFiles
             using (var client = new HttpClient())
             {
 
-                var response1 = await client.PostAsync("http://localhost:5000/connect/token", formContent);
+                var response1 = await client.PostAsync("https://chqa-oauth-api.coreoflowsandbox.com/connect/token", formContent);
                 var responseBody1 = response1.Content.ReadAsStringAsync();
                 data = Newtonsoft.Json.JsonConvert.DeserializeObject<User>(responseBody1.Result);
             }
@@ -82,7 +85,7 @@ namespace CoreoHome.ProcessBulkUploadFiles
                 string apiResult;
 
                 using (var client = new HttpClient())
-                {               
+                {
                     // Add an Accept header for JSON format.
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", "Bearer " + token);
@@ -122,7 +125,7 @@ namespace CoreoHome.ProcessBulkUploadFiles
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                 throw;
+                throw;
             }
         }
     }
