@@ -34,16 +34,17 @@ namespace CoreoHome.ProcessBulkUploadFiles
                     CallApiGet(Setting.ServiceProviderUrl, UploadFileType.ServiceProvider, token.Result);
                     CallApiGet(Setting.EntityUrl, UploadFileType.Entity, token.Result);
                     CallApiGet(Setting.EntityServiceProviderUrl, UploadFileType.EntityServiceProvider, token.Result);
-                    CallApiGet(Setting.EntityUserUrl, UploadFileType.EntityUser, token.Result);
-                    CallApiGet(Setting.PatientTagsUrl, UploadFileType.PatientTags, token.Result);
+                    CallApiGet(Setting.EntityUserUrl, UploadFileType.EntityUser, token.Result);                   
                 }
-                Console.Read();
+                Environment.Exit(-1);
+                Console.Read();        
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                throw;
-            }
+                Environment.Exit(-1);
+                throw;              
+            }          
         }
 
         public static async Task<string> Token()
@@ -54,8 +55,8 @@ namespace CoreoHome.ProcessBulkUploadFiles
             //var username = "peter.allen@mailinator.com";
             //var password = "Emids@111";
 
-            var username = "tyler.ford@mailinator.com";
-            var password = "Emids@000";
+            var username = "roy.snyder@mailinator.com";
+            var password = "Emids@008";
 
             var formContent = new FormUrlEncodedContent(new[]
                         {
@@ -70,7 +71,7 @@ namespace CoreoHome.ProcessBulkUploadFiles
             using (var client = new HttpClient())
             {
 
-                var response1 = await client.PostAsync("https://chqa-oauth-api.coreoflowsandbox.com/connect/token", formContent);
+                var response1 = await client.PostAsync("https://pftest-oauth-api.coreoflowsandbox.com/connect/token", formContent);
                 var responseBody1 = response1.Content.ReadAsStringAsync();
                 data = Newtonsoft.Json.JsonConvert.DeserializeObject<User>(responseBody1.Result);
             }
