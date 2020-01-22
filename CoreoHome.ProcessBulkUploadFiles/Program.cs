@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
 namespace CoreoHome.ProcessBulkUploadFiles
 {
     public class Program
     {
+        private static object JsonConvert;
+
         public enum UploadFileType
         {
             Patient = 63,
@@ -22,32 +26,70 @@ namespace CoreoHome.ProcessBulkUploadFiles
         {
             try
             {
-                CallApiGet(ConfigurationManager.AppSettings["PatientUrl"], UploadFileType.Patient);
-                CallApiGet(ConfigurationManager.AppSettings["CareTeamUrl"], UploadFileType.CareTeam);
-                CallApiGet(ConfigurationManager.AppSettings["ServiceProviderUrl"], UploadFileType.ServiceProvider);
-                CallApiGet(ConfigurationManager.AppSettings["EntityUrl"], UploadFileType.Entity);
-                CallApiGet(ConfigurationManager.AppSettings["EntityServiceProviderUrl"], UploadFileType.EntityServiceProvider);
-                CallApiGet(ConfigurationManager.AppSettings["EntityUserUrl"], UploadFileType.EntityUser);
-                CallApiGet(ConfigurationManager.AppSettings["PatientTagsUrl"], UploadFileType.PatientTags);
-                Console.Read();
+                var token = Token();
+                if (!string.IsNullOrEmpty(token.Result))
+                {                   
+                    CallApiGet(Setting.PatientUrl, UploadFileType.Patient, token.Result);
+                    CallApiGet(Setting.CareTeamUrl, UploadFileType.CareTeam, token.Result);
+                    CallApiGet(Setting.ServiceProviderUrl, UploadFileType.ServiceProvider, token.Result);
+                    CallApiGet(Setting.EntityUrl, UploadFileType.Entity, token.Result);
+                    CallApiGet(Setting.EntityServiceProviderUrl, UploadFileType.EntityServiceProvider, token.Result);
+                    CallApiGet(Setting.EntityUserUrl, UploadFileType.EntityUser, token.Result);                   
+                }
+                Environment.Exit(-1);
+                Console.Read();        
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                throw;
-            }
+                Environment.Exit(-1);
+                throw;              
+            }          
         }
 
-        private static void CallApiGet(string apiUrl, UploadFileType fileType)
+        public static async Task<string> Token()
+        {
+            var clientid = "roclientsp";
+            var clientsecret = "coreohomesecret";
+            var granttype = "password";
+            //var username = "peter.allen@mailinator.com";
+            //var password = "Emids@111";
+
+            var username = "roy.snyder@mailinator.com";
+            var password = "Emids@008";
+
+            var formContent = new FormUrlEncodedContent(new[]
+                        {
+                new KeyValuePair<string, string>("client_id", clientid),
+                new KeyValuePair<string, string>("client_secret", clientsecret),
+                new KeyValuePair<string, string>("grant_type", granttype),
+                new KeyValuePair<string, string>("username", username),
+                new KeyValuePair<string, string>("password", password)
+                   });
+
+            User data;
+            using (var client = new HttpClient())
+            {
+
+                var response1 = await client.PostAsync("https://pftest-oauth-api.coreoflowsandbox.com/connect/token", formContent);
+                var responseBody1 = response1.Content.ReadAsStringAsync();
+                data = Newtonsoft.Json.JsonConvert.DeserializeObject<User>(responseBody1.Result);
+            }
+
+            return data.access_token;
+        }
+
+        private static async void CallApiGet(string apiUrl, UploadFileType fileType, string token)
         {
             try
             {
                 string apiResult;
+
                 using (var client = new HttpClient())
                 {
                     // Add an Accept header for JSON format.
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
+                    client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", "Bearer " + token);
                     HttpResponseMessage response = client.GetAsync(apiUrl).Result;
                     apiResult = response.IsSuccessStatusCode
                         ? response.Content.ReadAsStringAsync().Result
